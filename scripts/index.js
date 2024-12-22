@@ -34,10 +34,10 @@ const addCard = (name, link) => {
 }
 
 cardList.forEach(card => {
-        const cardName = card.name;
-        const cardLink = card.link;
+    const cardName = card.name;
+    const cardLink = card.link;
 
-        addCard(cardName, cardLink);
+    addCard(cardName, cardLink);
 })
 
 addButton.addEventListener('click', () => {
