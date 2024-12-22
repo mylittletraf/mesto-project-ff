@@ -46,23 +46,3 @@ cardList.forEach((card) => {
 
   addCard(cardName, cardLink);
 });
-
-addButton.addEventListener("click", () => {
-  popupNewCard.classList.add("popup_is-opened");
-});
-
-saveButton.addEventListener("click", () => {
-  const cardName = document.querySelector(".popup__input_type_card-name").value;
-  const cardLink = document.querySelector(".popup__input_type_url").value;
-
-  addCard(cardName, cardLink);
-
-  popupNewCard.classList.toggle("popup_is-opened");
-
-  document.querySelector(".popup__input_type_card-name").value = "";
-  document.querySelector(".popup__input_type_url").value = "";
-});
-
-closeButton.addEventListener("click", () => {
-  popupNewCard.classList.remove("popup_is-opened");
-});
