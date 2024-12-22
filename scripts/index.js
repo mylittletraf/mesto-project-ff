@@ -13,8 +13,8 @@ const addButton = document.querySelector(".profile__add-button");
 const saveButton = document.querySelector(".popup__button");
 const popupNewCard = document.querySelector(".popup_type_new-card");
 const closeButton = popupNewCard.querySelector(".popup__close");
-const inputCardName = document.querySelector(".popup__input_type_card-name");
-const inputCardLink = document.querySelector(".popup__input_type_url");
+const inputCardName = popupNewCard.querySelector(".popup__input_type_card-name");
+const inputCardLink = popupNewCard.querySelector(".popup__input_type_url");
 const cardList = initialCards;
 
 
