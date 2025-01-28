@@ -8,6 +8,9 @@
 
 // @todo: Вывести карточки на страницу
 
+import '../pages/index.css';
+import {initialCards} from './cards'
+
 const placeContainer = document.querySelector(".places__list");
 const addButton = document.querySelector(".profile__add-button");
 const saveButton = document.querySelector(".popup__button");
