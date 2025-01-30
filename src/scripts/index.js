@@ -15,7 +15,8 @@ const placeContainer = document.querySelector(".places__list");
 const addButton = document.querySelector(".profile__add-button");
 const saveButton = document.querySelector(".popup__button");
 const popupNewCard = document.querySelector(".popup_type_new-card");
-const closeButton = popupNewCard.querySelector(".popup__close");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const popupProfileEdit = document.querySelector(".popup_type_edit");
 const inputCardName = popupNewCard.querySelector(".popup__input_type_card-name");
 const inputCardLink = popupNewCard.querySelector(".popup__input_type_url");
 const cardList = initialCards;
@@ -57,9 +58,7 @@ cardList.forEach((cardItem) => {
 });
 
 
-addButton.addEventListener("click", () => {
-  popupNewCard.classList.add("popup_is-opened");
-});
+
 
 saveButton.addEventListener("click", () => {
   const cardName = inputCardName.value;
@@ -78,8 +77,47 @@ saveButton.addEventListener("click", () => {
 
 });
 
-closeButton.addEventListener("click", () => {
-  popupNewCard.classList.remove("popup_is-opened");
-  inputCardName.value = "";
-  inputCardLink.value = "";
-});
+
+addButton.addEventListener("click", () => {openPopup(popupNewCard);});
+profileEditButton.addEventListener("click", () => {openPopup(popupProfileEdit);})
+
+
+document.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("popup__close")) {
+    closePopup(evt.target.closest(".popup_is-opened"));
+  }
+
+  if (evt.target.classList.contains("popup")) {
+    closePopup(evt.target);
+  }
+})
+
+function openPopup(popup) {
+  if (popup) {
+    popup.classList.add("popup_is-opened");
+    document.addEventListener("keydown", handleEscClose);
+  }
+}
+
+function closePopup(popup) {
+  if (popup) {
+    popup.classList.remove("popup_is-opened");
+    document.removeEventListener("keydown", handleEscClose);
+  }
+}
+
+function handleEscClose(event) {
+  if (event.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closePopup(openedPopup);
+    }
+  }
+}
+
+// closeButton.addEventListener("click", () => {
+//   popupNewCard.classList.remove("popup_is-opened");
+//   inputCardName.value = "";
+//   inputCardLink.value = "";
+// });
+
