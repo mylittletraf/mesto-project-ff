@@ -12,7 +12,9 @@ export function openModal(popup) {
 export function closeModal(popup) {
     if (popup) {
         popup.classList.remove("popup_is-opened");
-
+        setTimeout(() => {
+            popup.classList.remove("popup_is-animated");
+        }, 600);
         document.removeEventListener("keydown", handleEscClose);
     }
 }
