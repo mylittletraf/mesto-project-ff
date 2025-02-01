@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import {initialCards} from './cards'
-import {createCard, handleDelete, handleLike, handleOpenImage} from '../components/card.js';
+import {createCard, handleDelete, handleLike} from '../components/card.js';
 import {closeModal, openModal} from '../components/modal'
 
 
@@ -13,6 +13,11 @@ const profile = document.querySelector(".profile__info")
 const profileForm = document.forms["edit-profile"]
 const cardForm = document.forms["new-place"]
 const popUpImage = document.querySelector(".popup_type_image");
+const popUpImg = popUpImage.querySelector(".popup__image")
+const popUpCaption = popUpImage.querySelector(".popup__caption")
+const popups = document.querySelectorAll('.popup')
+const profileTitle = profile.querySelector(".profile__title")
+const profileDesc = profile.querySelector(".profile__description")
 
 
 initialCards.forEach((cardItem) => {
@@ -35,15 +40,13 @@ document.addEventListener("keydown", (evt) => {
     }
 })
 
-document.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("popup__close")) {
-        closeModal(evt.target.closest(".popup_is-opened"));
-    }
-
-    if (evt.target.classList.contains("popup")) {
-        closeModal(evt.target);
-    }
-})
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_is-opened') || evt.target.classList.contains('popup__close')) {
+            closeModal(popup);
+        }
+    });
+});
 
 profileForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
@@ -62,13 +65,23 @@ cardForm.addEventListener("submit", (evt) => {
     cardForm.reset();
 })
 
-function saveProfileForm(profileForm, profile) {
-    profile.querySelector(".profile__title").textContent = profileForm.name.value
-    profile.querySelector(".profile__description").textContent = profileForm.description.value
+function handleOpenImage(evt, popUpImage, openModal) {
+    openModal(popUpImage);
+
+    const cardImage = evt.target.closest('.card').querySelector('.card__image');
+    const cardTitle = evt.target.closest('.card').querySelector('.card__title');
+
+    popUpImg.src = cardImage.src;
+    popUpImg.alt = cardImage.alt;
+    popUpCaption.textContent = cardTitle.textContent;
+}
+
+function saveProfileForm(profileForm) {
+    profileTitle.textContent = profileForm.name.value
+    profileDesc.textContent = profileForm.description.value
 }
 
 function fillProfileForm(form) {
-    form.elements.name.value = profile.querySelector(".profile__title").textContent
-    form.elements.description.value = profile.querySelector(".profile__description").textContent
+    form.elements.name.value = profileTitle.textContent
+    form.elements.description.value = profileDesc.textContent
 }
-

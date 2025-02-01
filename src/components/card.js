@@ -6,16 +6,6 @@ export const handleLike = (evt) => {
     evt.target.classList.toggle("card__like-button_is-active");
 };
 
-export const handleOpenImage = (evt, popUpImage, openModal) => {
-    openModal(popUpImage);
-
-    const cardImage = evt.target.closest('.card').querySelector('.card__image');
-    const cardTitle = evt.target.closest('.card').querySelector('.card__title');
-
-    popUpImage.querySelector(".popup__image").src = cardImage.src;
-    popUpImage.querySelector(".popup__caption").textContent = cardTitle.textContent;
-};
-
 export const createCard = (item, handleDelete, handleLike, handleOpenImage, popUpImage, openModal) => {
     const cardTemplate = document.querySelector(`#card-template`).content;
     const cardElement = cardTemplate
