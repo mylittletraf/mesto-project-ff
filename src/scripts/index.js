@@ -1,8 +1,16 @@
 import '../pages/index.css';
 import {initialCards} from './cards'
+import {enableValidation, clearValidation} from './validation'
 import {createCard, handleDelete, handleLike} from '../components/card.js';
 import {closeModal, openModal} from '../components/modal'
 
+const selectorList = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input-error',
+};
 
 const placeContainer = document.querySelector(".places__list");
 const addButton = document.querySelector(".profile__add-button");
@@ -26,12 +34,14 @@ initialCards.forEach((cardItem) => {
 });
 
 addButton.addEventListener("click", () => {
+    clearValidation(popupNewCard, selectorList);
     openModal(popupNewCard);
 });
 
 profileEditButton.addEventListener("click", () => {
-    openModal(popupProfileEdit);
+    clearValidation(popupProfileEdit, selectorList);
     fillProfileForm(profileForm);
+    openModal(popupProfileEdit);
 })
 
 document.addEventListener("keydown", (evt) => {
@@ -85,3 +95,7 @@ function fillProfileForm(form) {
     form.elements.name.value = profileTitle.textContent
     form.elements.description.value = profileDesc.textContent
 }
+
+
+
+enableValidation(selectorList);
