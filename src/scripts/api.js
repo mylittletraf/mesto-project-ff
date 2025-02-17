@@ -19,6 +19,6 @@ export function makeRequest(endpoint, requestMethod = "GET", body = null) {
       }
     })
     .catch((err) => {
-      console.error(err); // выводим ошибку в консоль
+      console.error(err);
     });
 }

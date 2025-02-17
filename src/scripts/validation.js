@@ -2,14 +2,12 @@ const showInputError = (formElement, inputElement, errorMessage, selectors) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(selectors.inputErrorField);
   errorElement.style.opacity = "1";
-  // errorElement.classList.add(selectors.inputErrorClass);
   errorElement.textContent = errorMessage;
 };
 
 const hideInputError = (formElement, inputElement, selectors) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(selectors.inputErrorField);
-  // errorElement.classList.remove(selectors.inputErrorClass);
   errorElement.style.opacity = "0";
   errorElement.textContent = "";
 };
