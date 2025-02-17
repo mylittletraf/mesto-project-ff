@@ -73,14 +73,34 @@ profileForm.addEventListener("submit", (evt) => {
     name: profileForm.name.value,
     about: profileForm.description.value,
   };
-  updateProfile("users/me", profileInfo);
-  closeModal(popupProfileEdit);
+  makeRequest("users/me", "PATCH", profileInfo)
+    .then((data) => {
+        updateProfileHead(data);
+        closeModal(popupProfileEdit);
+    })
+    .catch((err) => {
+        console.error("Ошибка при обновлении профиля:", err);
+    })
+    .finally(() => {
+        isLoading(false);
+    });
+
 });
 
 avatarForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  updateAvatar("users/me/avatar", { avatar: avatarForm.link.value });
-  closeModal(popUpUpdateAvatar);
+  makeRequest("users/me/avatar", "PATCH", { avatar: avatarForm.link.value })
+    .then((data) => {
+        updateProfileHead(data);
+        closeModal(popUpUpdateAvatar);
+    })
+    .catch((err) => {
+        console.error("Ошибка при обновлении аватара:", err);
+    })
+    .finally(() => {
+        isLoading(false);
+    });
+
 });
 
 cardForm.addEventListener("submit", (evt) => {
@@ -148,29 +168,6 @@ Promise.all([makeRequest("users/me"), makeRequest("cards")])
   .catch((err) => {
     console.error("Ошибка загрузки данных:", err);
   });
-
-function updateData(endpoint, body, callback) {
-  isLoading(true);
-
-  makeRequest(endpoint, "PATCH", body)
-    .then((data) => {
-      callback(data);
-    })
-    .catch((err) => {
-      console.error("Ошибка при обновлении данных:", err);
-    })
-    .finally(() => {
-      isLoading(false);
-    });
-}
-
-function updateProfile(endpoint, body) {
-  updateData(endpoint, body, updateProfileHead);
-}
-
-function updateAvatar(endpoint, body) {
-  updateData(endpoint, body, updateProfileHead);
-}
 
 function addNewCard(endpoint, body) {
   isLoading(true);

@@ -17,8 +17,7 @@ export function makeRequest(endpoint, requestMethod = "GET", body = null) {
       } else {
         return Promise.reject(res.status);
       }
-    })
-    .catch((err) => {
-      console.error(err);
     });
 }
+
+

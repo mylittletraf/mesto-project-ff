@@ -3,16 +3,34 @@ import { closeModal, openModal } from "./modal";
 
 const confirmForm = document.forms["delete-confirm"];
 const confirmPopUp = document.querySelector(".popup_type_delete-confirm");
+let cardToDelete = null;
+
 
 export const handleDelete = (cardElement) => {
+  cardToDelete = cardElement;
   openModal(confirmPopUp);
-  confirmForm.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    deleteCard(`cards/${cardElement.id}`, cardElement);
-    closeModal(confirmPopUp);
-    cardElement.remove();
-  });
 };
+
+confirmForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  if (cardToDelete) {
+
+    makeRequest(`cards/${cardToDelete.id}`, "DELETE")
+    .then(() => {
+        console.log(`Карточка ${cardToDelete.id} удалена`);
+        closeModal(confirmPopUp);
+        cardToDelete.remove();
+        cardToDelete = null;
+    })
+    .catch((error) => {
+        console.error("Ошибка при удалении карточки:", error);
+    })
+    .finally(() => {
+        console.log("Операция удаления завершена");
+    });
+
+  }
+});
 
 export const handleLike = (evt) => {
   const likeButton = evt.target;
@@ -37,12 +55,6 @@ export const handleLike = (evt) => {
       });
   }
 };
-
-function deleteCard(endpoint, cardElement) {
-  makeRequest(endpoint, "DELETE").then(() => {
-    console.log(`Карточка ${cardElement.id} удалена`);
-  });
-}
 
 function interactLike(endpoint, method, cardElement) {
   return makeRequest(endpoint, method).then((data) => {
