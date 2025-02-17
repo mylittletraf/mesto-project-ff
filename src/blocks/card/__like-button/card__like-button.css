@@ -1,8 +1,15 @@
 .card__like-button {
   width: 21px;
-  height: 18px;
+  height: 35px;
   background: transparent url('../../../images/like-inactive.svg') no-repeat;
-  
+
+  font-size: 13px;
+
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
   background-size: 21px 18px;
   border: none;
   cursor: pointer;
@@ -18,3 +25,5 @@
 .card__like-button:hover {
   opacity: 0.6;
 }
+
+

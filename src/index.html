@@ -29,7 +29,7 @@
     </main>
     <footer class="footer page__section">
         <p class="footer__copyright">
-            © 2021 Mesto Russia
+            © 2025 Mesto Russia
         </p>
     </footer>
     <div class="popup popup_type_edit">
@@ -67,11 +67,32 @@
             </form>
         </div>
     </div>
+       <div class="popup popup_type_update_avatar">
+        <div class="popup__content">
+            <button class="popup__close" type="button"></button>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form class="popup__form" name="update_avatar" novalidate>
+                <input class="popup__input popup__input_type_update_avatar" id="popup__update_avatar" name="link" placeholder="Ссылка на картинку"
+                       required type="url">
+                <span class="popup__input-error popup__update_avatar-error"></span>
+                <button class="button popup__button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <div class="popup popup_type_image">
         <div class="popup__content popup__content_content_image">
             <button class="popup__close" type="button"></button>
             <img alt="" class="popup__image" src="">
             <p class="popup__caption"></p>
+        </div>
+    </div>
+        <div class="popup popup_type_delete-confirm ">
+        <div class="popup__content popup__delete">
+            <button class="popup__close" type="button"></button>
+            <h3 class="popup__title">Вы уверены?</h3>
+            <form class="popup__form" name="delete-confirm" novalidate>
+                <button class="button popup__button" type="submit">Да</button>
+            </form>
         </div>
     </div>
 </div>
