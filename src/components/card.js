@@ -1,15 +1,9 @@
-import { makeRequest } from "../scripts/api";
-import { closeModal, openModal } from "./modal";
+import {makeRequest} from "../scripts/api";
+import {closeModal} from "./modal";
+import {cardToDelete, confirmPopUp} from "../scripts";
 
 const confirmForm = document.forms["delete-confirm"];
-const confirmPopUp = document.querySelector(".popup_type_delete-confirm");
-let cardToDelete = null;
 
-
-export const handleDelete = (cardElement) => {
-  cardToDelete = cardElement;
-  openModal(confirmPopUp);
-};
 
 confirmForm.addEventListener("submit", (evt) => {
   evt.preventDefault();

@@ -1,8 +1,8 @@
 import "../pages/index.css";
-import { clearValidation, enableValidation } from "./validation";
-import { createCard, handleDelete, handleLike } from "../components/card.js";
-import { closeModal, openModal } from "../components/modal";
-import { makeRequest } from "./api.js";
+import {clearValidation, enableValidation} from "./validation";
+import {createCard, handleLike} from "../components/card.js";
+import {closeModal, openModal} from "../components/modal";
+import {makeRequest} from "./api.js";
 
 const selectorList = {
   formSelector: ".popup__form",
@@ -143,6 +143,13 @@ function updateProfileHead(data) {
   profileDesc.textContent = data.about;
   profileImage.style.backgroundImage = `url(${data.avatar})`;
 }
+
+export const confirmPopUp = document.querySelector(".popup_type_delete-confirm");
+export let cardToDelete = null;
+export const handleDelete = (cardElement) => {
+  cardToDelete = cardElement;
+  openModal(confirmPopUp);
+};
 
 function getCards(cards, userId) {
   cards.forEach((cardItem) => {
