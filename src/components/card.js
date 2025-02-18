@@ -1,30 +1,5 @@
 import {makeRequest} from "../scripts/api";
-import {closeModal} from "./modal";
-import {cardToDelete, confirmPopUp} from "../scripts";
 
-const confirmForm = document.forms["delete-confirm"];
-
-
-confirmForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  if (cardToDelete) {
-
-    makeRequest(`cards/${cardToDelete.id}`, "DELETE")
-    .then(() => {
-        console.log(`Карточка ${cardToDelete.id} удалена`);
-        closeModal(confirmPopUp);
-        cardToDelete.remove();
-        cardToDelete = null;
-    })
-    .catch((error) => {
-        console.error("Ошибка при удалении карточки:", error);
-    })
-    .finally(() => {
-        console.log("Операция удаления завершена");
-    });
-
-  }
-});
 
 export const handleLike = (evt) => {
   const likeButton = evt.target;
@@ -73,6 +48,7 @@ export const createCard = (
     .cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
 
   cardImage.src = item.link;
   cardImage.alt = `Фото карточки с названием ${item.name}`;
@@ -92,7 +68,7 @@ export const createCard = (
       .querySelector(".card__delete-button")
       .addEventListener("click", () => handleDelete(cardElement));
   } else {
-    cardElement.classList.remove("card__delete-button");
+    deleteButton.remove();
   }
 
   likeButton.textContent = Array.isArray(item.likes) ? item.likes.length : 0;

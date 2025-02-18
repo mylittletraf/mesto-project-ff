@@ -21,6 +21,7 @@ const popupProfileEdit = document.querySelector(".popup_type_edit");
 const profile = document.querySelector(".profile__info");
 const profileForm = document.forms["edit-profile"];
 const cardForm = document.forms["new-place"];
+const confirmForm = document.forms["delete-confirm"];
 const avatarForm = document.forms["update_avatar"];
 const popUpImage = document.querySelector(".popup_type_image");
 const popUpImg = popUpImage.querySelector(".popup__image");
@@ -150,6 +151,27 @@ export const handleDelete = (cardElement) => {
   cardToDelete = cardElement;
   openModal(confirmPopUp);
 };
+
+confirmForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  if (cardToDelete) {
+
+    makeRequest(`cards/${cardToDelete.id}`, "DELETE")
+    .then(() => {
+        console.log(`Карточка ${cardToDelete.id} удалена`);
+        closeModal(confirmPopUp);
+        cardToDelete.remove();
+        cardToDelete = null;
+    })
+    .catch((error) => {
+        console.error("Ошибка при удалении карточки:", error);
+    })
+    .finally(() => {
+        console.log("Операция удаления завершена");
+    });
+
+  }
+});
 
 function getCards(cards, userId) {
   cards.forEach((cardItem) => {
