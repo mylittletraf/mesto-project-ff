@@ -31,6 +31,8 @@ const profileTitle = profile.querySelector(".profile__title");
 const profileDesc = profile.querySelector(".profile__description");
 const profileImage = document.querySelector(".profile__image");
 const popUpButton = document.querySelector(".popup__button");
+export const confirmPopUp = document.querySelector(".popup_type_delete-confirm");
+export let cardToDelete = null;
 
 
 addButton.addEventListener("click", () => {
@@ -144,8 +146,6 @@ function updateProfileHead(data) {
   profileImage.style.backgroundImage = `url(${data.avatar})`;
 }
 
-export const confirmPopUp = document.querySelector(".popup_type_delete-confirm");
-export let cardToDelete = null;
 export const handleDelete = (cardElement) => {
   cardToDelete = cardElement;
   openModal(confirmPopUp);
