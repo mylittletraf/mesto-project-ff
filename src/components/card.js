@@ -55,9 +55,7 @@ export const createCard = (
   cardElement.id = item._id;
   cardElement.querySelector(".card__title").textContent = item.name;
 
-  cardElement
-    .querySelector(".card__like-button")
-    .addEventListener("click", handleLike);
+  likeButton.addEventListener("click", handleLike);
 
   cardImage.addEventListener("click", (evt) =>
     handleOpenImage(evt, popUpImage, openModal)
